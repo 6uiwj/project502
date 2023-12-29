@@ -6,6 +6,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -31,5 +32,10 @@ public class MvcConfig implements WebMvcConfigurer {
         ms.setBasenames("messages.commons", "messages.validations", "messages.errors");
 
         return ms;
+    }
+
+    @Bean //양식에서 _method를 가지고 get/post이외의 메서드를 쓸 수 있다.
+    public HiddenHttpMethodFilter httpMethodFilter() {
+        return new HiddenHttpMethodFilter();
     }
 }
