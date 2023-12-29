@@ -27,7 +27,7 @@ public class CommonController {
 
         model.addAttribute("status",status.value());
         model.addAttribute("path", request.getRequestURI());
-        model.addAttribute("metod",request.getMethod());
+        model.addAttribute("method",request.getMethod());
         model.addAttribute("message",e.getMessage());
 
             return "error/common";
