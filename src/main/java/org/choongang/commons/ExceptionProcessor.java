@@ -1,19 +1,17 @@
-package org.choongang.controllers;
+package org.choongang.commons;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.choongang.commons.exceptions.CommonException;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-
-@ControllerAdvice("org.choongang.controllers")
-public class CommonController {
-    //모든 예외를 여기에 넣어줄 것
+public interface ExceptionProcessor {
+    //일반적인 컨트롤러 에러를 추가할 때 사용할 페이지
+    //default로 변경.. 왜...?public이면 왜 에러뜸..?
     @ExceptionHandler(Exception.class)
-    public String errorHandler(Exception e, HttpServletResponse response, HttpServletRequest request, Model model) {
+    default String errorHandler(Exception e, HttpServletResponse response, HttpServletRequest request, Model model) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         //commonException 형태만 가져와서 응답코드 체크
         if(e instanceof CommonException) {
@@ -30,6 +28,6 @@ public class CommonController {
         model.addAttribute("method",request.getMethod());
         model.addAttribute("message",e.getMessage());
 
-            return "error/common";
+        return "error/common";
     }
 }
