@@ -19,7 +19,7 @@ public interface ExceptionRestProcessor {
 
         JSONData<Object> data = new JSONData<>();
         data.setSuccess(false); //실패
-        data.setStatus(status); //태코드가 변경됨
+        data.setStatus(status); //상태코드가 변경됨
         data.setMessage(e.getMessage());
 
         e.printStackTrace();
