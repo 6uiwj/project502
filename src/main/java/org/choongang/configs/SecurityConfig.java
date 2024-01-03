@@ -47,8 +47,7 @@ public class SecurityConfig {
         //사용법: hasRole('ADMIN')
         http.authorizeHttpRequests(c -> { //인가설정 (특정권한이 있을 때 접근가능한 페이지 통제)
             c.requestMatchers("/mypage/**").authenticated() //회원 전용(로그인시만 접근가능)
-                    .requestMatchers("/admin/**") //
-                    .hasAnyAuthority("ADMIN", "MANAGER") //이 권한이 있는 사람만 접근가능 (없으면 로그인 페이지로 이동)
+                    //.requestMatchers("/admin/**").hasAnyAuthority("ADMIN", "MANAGER") //이 권한이 있는 사람만 접근가능 (없으면 로그인 페이지로 이동)
                     .anyRequest().permitAll(); //그외 모든 페이지는 모두 접근 가능
 
         });

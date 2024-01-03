@@ -40,6 +40,7 @@ public class MemberInfoService implements UserDetailsService {
                 .userId(member.getUserId())
                 .password(member.getPassword())
                 .member(member)
+                .authorities(authorities)
                 .build();
     }
 }
