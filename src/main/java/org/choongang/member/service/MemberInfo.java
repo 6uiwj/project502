@@ -17,7 +17,7 @@ public class MemberInfo implements UserDetails {
     private String password;
     private Member member;
 
-    private Collection<? extends GrantedAuthority> authorities;
+    private Collection<? extends GrantedAuthority> authorities; //권한체크 위해 -> 데이터 넣어주기
 
     //특정페이지 권한 인가
     @Override

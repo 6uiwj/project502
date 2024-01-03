@@ -3,6 +3,7 @@ package org.choongang.commons.interceptors;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.choongang.member.MemberUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -14,6 +15,7 @@ public class CommonInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         checkDevice(request);
+        clearLoginData(request);
         return true;
     }
 
@@ -36,5 +38,15 @@ public class CommonInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         session.setAttribute("device",device);
     }
-
+    //매개변수가 request인 이유 : 현재 접속주소를보고 로그인페이지가 아니면 세션을 비운다.
+    //getrequestURI 이용
+    //세션을 지우기 위해 세션 객체 필요 (request이용)
+    private void clearLoginData(HttpServletRequest request) {
+        String URL = request.getRequestURI();
+        //String의 contains 혹은 indexof 이용
+        if(URL.indexOf("/member/login") == -1) {
+            HttpSession session = request.getSession();
+            MemberUtil.clearLoginData(session);
+        }
+    }
 }

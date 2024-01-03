@@ -4,9 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.choongang.commons.ExceptionProcessor;
 import org.choongang.commons.Utils;
+import org.choongang.member.MemberUtil;
+import org.choongang.member.entities.Member;
 import org.choongang.member.service.JoinService;
-import org.choongang.member.service.MemberInfo;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +18,7 @@ public class MemberController implements ExceptionProcessor {
     private final Utils utils;
     private final JoinService joinService;
 
+    private final MemberUtil memberUtil;
     @GetMapping("/join") //회원가입 양식(form) 주소
     public String join(@ModelAttribute RequestJoin form) {
 
@@ -59,7 +60,7 @@ public class MemberController implements ExceptionProcessor {
     }
 
      */
-
+    /*
     @ResponseBody //아?
     @GetMapping("/info")
     public void info() {
@@ -68,5 +69,17 @@ public class MemberController implements ExceptionProcessor {
                 .getAuthentication()
                 .getPrincipal();
         System.out.println(memberInfo);
+    }
+
+     */
+    @ResponseBody //로그인하면 회원정보를 보여주고 로그인상태가 아니면 비로그인 상태라고 보여줄 것임
+    @GetMapping("/info")
+    public void info() {
+        if(memberUtil.isLogin()) { //로그인 상태체크
+            Member member = memberUtil.getMember();
+            System.out.println(member);  //회원정보 출력
+        } else {
+            System.out.println("미로그인 상태..");
+        }
     }
 }
