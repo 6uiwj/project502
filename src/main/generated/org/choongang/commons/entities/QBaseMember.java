@@ -1,4 +1,4 @@
-package org.choongang.member.entities;
+package org.choongang.commons.entities;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -15,11 +15,11 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultSupertypeSerializer")
 public class QBaseMember extends EntityPathBase<BaseMember> {
 
-    private static final long serialVersionUID = 1817322048L;
+    private static final long serialVersionUID = 1725085526L;
 
     public static final QBaseMember baseMember = new QBaseMember("baseMember");
 
-    public final org.choongang.commons.entities.QBase _super = new org.choongang.commons.entities.QBase(this);
+    public final QBase _super = new QBase(this);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;

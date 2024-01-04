@@ -2,6 +2,7 @@ package org.choongang.board.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.choongang.board.Repositories.BoardDataRepository;
+import org.choongang.board.entities.BoardData;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,9 @@ public class BoardController {
     @ResponseBody //void로 넣어서 응답내용은 없어도 됨
     @GetMapping("/test")
     public void test() {
-      //  BoardData data = BoardDataRepository.findById(1L).orElse(null);
-      //  data.setSubject("(수정)제목");
-
+        BoardData data = boardDataRepository.findById(1L).orElse(null);
+        data.setSubject("(수정)제목");
+        boardDataRepository.flush();
         /*
         BoardData data = new BoardData();
         data.setSubject("제목");
