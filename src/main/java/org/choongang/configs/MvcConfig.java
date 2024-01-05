@@ -24,6 +24,10 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(fileProperties.getUrl() + "**")
                 .addResourceLocations("file:///" + fileProperties.getPath());//현재 경로를 포함한 하위경로오ㅗ오오
+
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/");
+
     }
 
     // 메시지 추가
