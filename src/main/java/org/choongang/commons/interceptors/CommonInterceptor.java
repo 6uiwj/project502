@@ -63,6 +63,7 @@ public class CommonInterceptor implements HandlerInterceptor {
         ".xlxs", ".ppt"}; //URL에 이런 파일이 추가되었다면 이 파일들은 설정을 공유할 필요가 없다?(로드배제)
 
         String URL = request.getRequestURI().toLowerCase();
+
         boolean isIncluded = Arrays.stream(excludes).anyMatch(s -> URL.contains(s));
         if (isIncluded) {
             return;

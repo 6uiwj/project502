@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 import org.choongang.commons.entities.Base;
+import org.choongang.file.entities.FileInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,9 @@ public class Member extends Base {
     //로그인할 때
     @Id @GeneratedValue //PK 자동생성 어노테이션
     private Long seq;
+
+    @Column(length=65, nullable = false)
+    private String gid;
 
     @Column(length=80,nullable = false, unique = true)
     private String email;
@@ -31,4 +35,8 @@ public class Member extends Base {
     @ToString.Exclude
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY) //연관관계의 주인은 member ,필요할 때만 조회하겠다.
     private List<Authorities> authorities = new ArrayList<>();
+
+    //내부에 쓸 목적
+    @Transient
+    private FileInfo profileImage;
 }

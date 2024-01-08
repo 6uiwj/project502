@@ -22,13 +22,14 @@ import java.util.UUID;
 public class FileInfo extends BaseMember {
     @Id @GeneratedValue
     private Long seq; //파일 등록 번호, 서버에 업로드하는 파일명 기준
+
     @Column(length=65, nullable = false)
     private String gid = UUID.randomUUID().toString(); //랜덤하게 유니크아이디를 만들 수 있는 편의기능(문자열반환)
 
     @Column(length=65)
     private String location;
 
-    @Column(length=100)
+    @Column(length=80)
     private String fileName;
 
     @Column(length=30)

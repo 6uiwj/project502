@@ -135,44 +135,44 @@ public class FileInfoService {
      * @param height
      * @return
      */
-        public String[] getThumb(long seq, int width, int height) {
-            FileInfo fileInfo = get(seq);
-            String fileType = fileInfo.getFileType(); //파일이 이미지인지 체크
-            if(fileType.indexOf("image/") == -1) {
-                return null;
-            }
-
-            String fileName = seq + fileInfo.getExtension();
-
-            String thumbDir = getThumbDir(seq);
-            File _thumbDir = new File(thumbDir);
-            if(!_thumbDir.exists()) {
-                _thumbDir.mkdirs();
-            }
-            String thumbPath = String.format("%s/%d_%d_%s", thumbDir, width, height, fileName);
-            File _thumbPath = new File(thumbPath);
-            if(!_thumbDir.exists()) {
-               //썸네일 이미지가 없는 경우
-                try {
-                    Thumbnails.of(new File(fileInfo.getFilePath()))
-                            .size(width, height)
-                            .toFile(_thumbPath);
-                } catch  (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            String thumbUrl =  String.format("%s/%d_%d_%s", getThumbUrl(seq), width, height, fileName);
-
-            return new String[] {thumbPath, thumbUrl};
-        }
-        public String getThumbDir(long seq) {
-            String thumbDirCommon = "thumbs/" + (seq % 10L) + "/" + seq;
-           return fileProperties.getPath() + thumbDirCommon;
-
+    public String[] getThumb(long seq, int width, int height) {
+        FileInfo fileInfo = get(seq);
+        String fileType = fileInfo.getFileType(); //파일이 이미지인지 체크
+        if(fileType.indexOf("image/") == -1) {
+            return null;
         }
 
-        public String getThumbUrl(long seq) {
-            String thumbDirCommon = "thumbs/" + (seq % 10L) + "/" + seq;
-           return fileProperties.getPath() + thumbDirCommon;
+        String fileName = seq + fileInfo.getExtension();
+
+        String thumbDir = getThumbDir(seq);
+        File _thumbDir = new File(thumbDir);
+        if(!_thumbDir.exists()) {
+            _thumbDir.mkdirs();
         }
+        String thumbPath = String.format("%s/%d_%d_%s", thumbDir, width, height, fileName);
+        File _thumbPath = new File(thumbPath);
+        if(!_thumbDir.exists()) {
+            //썸네일 이미지가 없는 경우
+            try {
+                Thumbnails.of(new File(fileInfo.getFilePath()))
+                        .size(width, height)
+                        .toFile(_thumbPath);
+            } catch  (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        String thumbUrl =  String.format("%s/%d_%d_%s", getThumbUrl(seq), width, height, fileName);
+
+        return new String[] {thumbPath, thumbUrl};
+    }
+    public String getThumbDir(long seq) {
+        String thumbDirCommon = "thumbs/" + (seq % 10L) + "/" + seq;
+        return fileProperties.getPath() + thumbDirCommon;
+
+    }
+
+    public String getThumbUrl(long seq) {
+        String thumbDirCommon = "thumbs/" + (seq % 10L) + "/" + seq;
+        return fileProperties.getPath() + thumbDirCommon;
+    }
 }
