@@ -6,8 +6,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class RequestJoin {
+    //없을 때는 기본값을 넣어주자
+    private String gid = UUID.randomUUID().toString();
+
     @NotBlank @Email //이메일 형식인지 검증
     private String email;
 

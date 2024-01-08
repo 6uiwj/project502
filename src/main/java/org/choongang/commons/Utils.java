@@ -3,9 +3,14 @@ package org.choongang.commons;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.config.controllers.BasicConfig;
+import org.choongang.file.service.FileInfoService;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 @Component
@@ -14,6 +19,8 @@ public class Utils {
 
     private final HttpServletRequest request;
     private final HttpSession session;
+    private  FileInfoService fileInfoService;
+
     //3가지 메시지 번들 가져오기 (messages > *.properties 파일들)
     private static final ResourceBundle commonsBundle;
 
@@ -51,22 +58,25 @@ public class Utils {
         return prefix + path;
     }
 
-    public static String getMessage(String code, String type) {
-        type = StringUtils.hasText(type) ? type : "validations";
+
+    public static String getMessage(String code, String type)
+    {
+        type=StringUtils.hasText(type) ? type : "validaions";
 
         ResourceBundle bundle = null;
         if(type.equals("commons")) {
             bundle = commonsBundle;
+
         } else if (type.equals("errors")) {
             bundle = errorsBundle;
         } else {
             bundle = validationsBundle;
         }
-
         return bundle.getString(code);
     }
+
     public static String getMessage(String code) {
-        return getMessage(code,null);
+        return getMessage(code, null);
     }
 
     /**
@@ -75,9 +85,53 @@ public class Utils {
      * @return
      */
     public String nl2br(String str) {
+        str = Objects.requireNonNullElse(str, "");
         str = str.replaceAll("\\n","<br>")
                 .replaceAll("\\r","");
 
         return str;
     }
+
+    /**
+     * 썸네일 이미지 사이즈 설정
+     *
+     * @return
+     */
+    public List<int[]> getThumbSize() {
+        BasicConfig basicConfig = (BasicConfig)request.getAttribute("siteConfig");
+        String thumbSize = basicConfig.getThumbSize(); // \r\n
+        String[] thumbsSize = thumbSize.split("\\n");
+
+
+        List<int[]> data = Arrays.stream(thumbsSize)
+                .filter(StringUtils::hasText)
+                .map(s -> s.replaceAll("\\s+", ""))
+                .map(this::toConvert).toList();
+
+
+        return data;
+    }
+
+
+    private int[] toConvert(String size) {
+        size = size.trim();
+        int[] data = Arrays.stream(size.replaceAll("\\r","").
+                toUpperCase().split("X")).mapToInt(Integer::parseInt).toArray();
+
+        return data;
+    }
+
+    public String printThumb(long seq, int width, int height, String className) {
+        String[] data = fileInfoService.getThumb(seq, width, height);
+        if(data != null) {
+            String cls = StringUtils.hasText(className) ? " class='" + className + "'" : "";
+            String image = String.format("<img src='%s'%s>", data[1], cls);
+            return image;
+        }
+        return "";
+    }
+    public String printThumb(long seq, int width, int height) {
+        return printThumb(seq, width, height, null);
+    }
+
 }
