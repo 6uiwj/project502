@@ -38,3 +38,6 @@ out/
 
 #개발환경이 다르기 때문에 설정파일 분리? yml이 될 수도 있고 application이 될 수도 있으니까...배제
 application-dev.*
+
+#Q클래스는 자동생성되므로 올라가지 않게 해준다.
+src/main/generated/
