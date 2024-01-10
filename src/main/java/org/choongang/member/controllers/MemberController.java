@@ -33,7 +33,8 @@ public class MemberController implements ExceptionProcessor {
     //회원가입처리
     @PostMapping("/join")
     public String joinPs(@Valid RequestJoin form, Errors errors, Model model) {
- commonProcess("join", model);        joinService.process(form, errors);
+     commonProcess("join", model);
+     joinService.process(form, errors);
 
         if(errors.hasErrors()) {
             //에러가 발생했을 시 넘기지 않고 템플릿 쪽을 그대로 출력
