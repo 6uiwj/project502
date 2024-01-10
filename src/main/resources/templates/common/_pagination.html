@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--el식은 getter를 (get을 제외하고) 데려옴?  -->
+<th:block th:fragment="pagination" th:if="${pagination != null}" th:object="${pagination}">
+    <div class="pagination">
+        <th:block th:if="*{prevRangePage >0}"> <!--이전 페이지가 있는지-->
+            <a th:href="$*{#strings.concat(baseURL,'page=1')}" th:text="#{처음}" class="page"></a>
+            <a th:href="$*{#strings.concat(baseURL, 'page=', prevRangePage)}" th:text="#{이전}"
+               class="page"></a>
+        </th:block>
+
+        <!--pages는 list형태로 값이 나온다 string배열 / 2번째 값이 링크-->
+        <!--pagination.page를 문자열로 바꿔서 비교-->
+        <a th:each="p : *{pages}" th:href="${p[1]}" th:text="${p[0]}" class="page"
+           th:classappend="${'' + pagination.page == p[0]} ? 'on'"></a>
+
+        <th:block th:if="*{nextRangePage > 0 }">
+            <a th:href="*{#strings.concat(baseURL, 'page=', nextRangePage)}"
+               th:text="#{다음}" class="page"></a>
+            <a th:href="*{#strings.concat(baseURL, 'page=', totalPages)}"
+               th:text="#{마지막}" class="page"></a>
+        </th:block>
+
+    </div>
+</th:block>
+</html>

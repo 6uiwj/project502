@@ -134,4 +134,8 @@ public class Utils {
         return printThumb(seq, width, height, null);
     }
 
+
+    public static int onlyPositiveNumber(int num, int replace) {
+        return num < 1 ? replace : num;
+    }
 }
