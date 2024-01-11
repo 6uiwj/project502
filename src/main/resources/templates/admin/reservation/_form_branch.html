@@ -4,7 +4,7 @@
 <th:block th:fragment="form" th:object="${requestBranch}">
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
     <h2>기본 정보</h2>
-    <table class="table_cols">
+    <table class="table_cols mb30">
         <tr th:if="*{mode == 'edit_branch' && cCode != null}">
             <th>지점 코드</th>
             <td>
@@ -63,7 +63,7 @@
     <h2>예약 설정</h2>
     <table class="table_cols">
         <tr>
-            <th>요일 설정</th>
+            <th width="180">요일 설정</th>
             <td>
                 <input type="checkbox" name="bookYoil" value="일" id="bookYoil_1"
                 th:field="*{bookYoil}">
