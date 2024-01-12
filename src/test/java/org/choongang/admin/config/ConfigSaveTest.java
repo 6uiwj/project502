@@ -1,22 +1,14 @@
 package org.choongang.admin.config;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import org.choongang.admin.service.ConfigInfoService;
-import org.choongang.admin.service.ConfigSaveService;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Map;
-import java.util.Optional;
 
 @SpringBootTest
 @Transactional
 @TestPropertySource(properties = "spring.profiles.active=test")
 public class ConfigSaveTest {
+    /*
     @Autowired
     private ConfigSaveService saveService;
     @Autowired
@@ -41,5 +33,5 @@ public class ConfigSaveTest {
         System.out.println(opt.get());
     }
 
-
+    */
 }

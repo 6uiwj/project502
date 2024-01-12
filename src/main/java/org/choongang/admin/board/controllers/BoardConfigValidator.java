@@ -1,6 +1,7 @@
 package org.choongang.admin.board.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.board.Repositories.BoardRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;

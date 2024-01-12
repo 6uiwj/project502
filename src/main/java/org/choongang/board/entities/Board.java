@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.choongang.file.entities.FileInfo;
 import org.choongang.member.Authority;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
