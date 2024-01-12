@@ -22,18 +22,12 @@ public class FileController implements ExceptionProcessor {
     private final FileDeleteService deleteService;
     private final FileDownloadService downloadService;
 
-    @GetMapping("/upload")
-    public String upload() {
-
-        return "upload";
-    }
 
     @GetMapping("/delete/{seq}")
     public String delete(@PathVariable("seq") Long seq, Model model) {
         deleteService.delete(seq);
         //함수가 정의되어있으면 실행되도록?
-        String script = String.format("if (typeof parent.callbackFileDelete == " +
-                "'function') parent.callbackFileDelete(%d);", seq);
+        String script = String.format("if (typeof parent.callbackFileDelete == 'function') parent.callbackFileDelete(%d);", seq);
         model.addAttribute("script", script);
 
         return "common/_execute_script";
@@ -43,7 +37,7 @@ public class FileController implements ExceptionProcessor {
     //바디에 출력되던 데이터를 화면이 아니라 파일로 바꿈
     @ResponseBody
     @RequestMapping("/download/{seq}")
-    public void download(@PathVariable Long seq) {
+    public void download(@PathVariable("sdq") Long seq) {
 
         //바디에 출력데이터가 화면이 아닌 filename=test.txt 여기로 바뀜??
         //출력방향 바꾸기

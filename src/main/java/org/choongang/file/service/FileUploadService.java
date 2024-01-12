@@ -25,9 +25,10 @@ public class FileUploadService {
     private final FileProperties fileProperties;
     private final FileInfoRepository repository;
     private final FileInfoService infoService;
+    private final FileDeleteService deleteService;
     private final Utils utils;
 
-    public List<FileInfo> upload(MultipartFile[] files, String gid, String location, boolean imageOnly) {
+    public List<FileInfo> upload(MultipartFile[] files, String gid, String location, boolean imageOnly, Boolean singleFile) {
         /**
          * 1. 파일 정보 저장
          * 2. 서버쪽에 파일 업로드 처리
@@ -35,9 +36,16 @@ public class FileUploadService {
         //gid가 없을 때에는 기본값을 넣어주자
         gid = StringUtils.hasText(gid) ? gid : UUID.randomUUID().toString(); //자바 편의기능 - 중복되지 않는 유니크 아이디를 랜덤하게 만들어 줌
 
+        /*
+         * 단일 파일 업로드
+         * gid + location : 기 업로드된 파일 삭제 -> 새로 업로드
+         */
+        if (singleFile) {
+            deleteService.delete(gid, location);
+        }
 
         String uploadPath = fileProperties.getPath(); //파일 업로드 기본 경로
-        String thumbPath = uploadPath + "thumbs"; //썸네일 업로드 기본 경로
+        String thumbPath = uploadPath + "thumbs/"; //썸네일 업로드 기본 경로
 
         List<int[]> thumbsSize = utils.getThumbSize();
         List<FileInfo> uploadedFiles = new ArrayList<>(); //업로드 성공 파일 정보 목록

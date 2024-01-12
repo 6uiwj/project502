@@ -29,6 +29,8 @@ public class Menu {
                 new MenuDetail("add_branch", "지점 등록", "/admin/reservation/add_branch"),
                 new MenuDetail("holiday", "휴무일 관리", "/admin/reservation/holiday")
         ));
+
+
     }
     //code: 주메뉴코드
     public static List<MenuDetail> getMenus(String code) {

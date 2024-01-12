@@ -13,6 +13,7 @@ public class MemberUtil {
     private final HttpSession session;
 
     public boolean isAdmin() {
+
         if(isLogin()) {
             return getMember().getAuthorities()
                     .stream().map(Authorities::getAuthority)
