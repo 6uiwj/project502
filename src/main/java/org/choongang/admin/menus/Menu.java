@@ -30,6 +30,12 @@ public class Menu {
                 new MenuDetail("holiday", "휴무일 관리", "/admin/reservation/holiday")
         ));
 
+        //내코드
+        menus.put("reservation1", Arrays.asList(
+                new MenuDetail("list", "예약자 목록", "/admin/reservation1")
+        ));
+        //내코드 끝
+
 
     }
     //code: 주메뉴코드
