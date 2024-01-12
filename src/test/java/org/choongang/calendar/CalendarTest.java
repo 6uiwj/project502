@@ -3,6 +3,7 @@ package org.choongang.calendar;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @SpringBootTest
@@ -22,6 +23,11 @@ public class CalendarTest {
         System.out.println(data);
         }
 
-
+        @Test
+    void test3() {
+            Calendar cal = new Calendar();
+            Map<String, Object> map = new HashMap<>();
+            System.out.println(cal.getData(3,5).values());
+        }
 
 }

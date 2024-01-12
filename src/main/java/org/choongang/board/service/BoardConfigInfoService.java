@@ -129,9 +129,9 @@ public class BoardConfigInfoService {
 
         /* 검색 조건 처리 E */
 
-        Pageable pageable = PageRequest.of(page - 1, limit, Sort.by(desc("createdAt")));
+        Pageable pageable = PageRequest.of(page - 1, limit);
         Page<Board> data = boardRepository.findAll(andBuilder, pageable);
-
+        //아래에서  " , Sort.by(desc("createdAt"))" 이 왜 안먹힐까나....
         Pagination pagination = new Pagination(page, (int)data.getTotalElements(), limit, 10, request);
 
         return new ListData<>(data.getContent(), pagination);
