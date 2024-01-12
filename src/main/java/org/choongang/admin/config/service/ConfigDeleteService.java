@@ -1,4 +1,4 @@
-package org.choongang.admin.sersvice;
+package org.choongang.admin.config.service;
 
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.config.entities.Configs;
@@ -15,6 +15,7 @@ public class ConfigDeleteService {
         if (config == null) {
             return;
         }
+
         repository.delete(config);
         repository.flush();
     }

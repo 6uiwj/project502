@@ -19,13 +19,17 @@ public class RequestJoin {
     @NotBlank
     @Size(min=6)
     private String userId;
+
     @NotBlank
     @Size(min=8)
     private String password;
+
     @NotBlank
     private String confirmPassword;
+
     @NotBlank
     private String name;
+
     @AssertTrue //참인지 확인
     private boolean agree;
 }

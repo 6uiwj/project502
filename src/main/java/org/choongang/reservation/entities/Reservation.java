@@ -16,13 +16,13 @@ public class Reservation extends Base {
     @Id @GeneratedValue
     private Long bookCode; //예약 코드
 
-    //한명이 여러군데에 예약할 수있으니까...
+    //한명이 여러군데에 예약할 수 있으니까...
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name="member_seq")
     private Member member;
 
     @Column(length=15, nullable = false)
-    private String donnerTel; //헌혈자 전화번호 /로그인화면이면 완성시키고 ,바꿀 수있도록 설정
+    private String donnerTel; //헌혈자 전화번호 /로그인화면이면 완성시키고 ,바꿀 수 있도록 설정
 
     //헌혈타입은 상수로 빼준다.
     @Enumerated(EnumType.STRING)
