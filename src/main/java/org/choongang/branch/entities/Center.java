@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 @Entity
 public class Center extends BaseMember {
+    @Id @GeneratedValue
+    private Long cCode;
 
     @Column(length=80, nullable = false)
     private String cName; // 지점명

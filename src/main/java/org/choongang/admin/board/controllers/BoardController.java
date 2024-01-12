@@ -93,6 +93,8 @@ public class BoardController implements ExceptionProcessor {
         String mode = config.getMode();
 
         commonProcess(mode, model);
+        configValidator.validate(config, errors);
+
 
         if (errors.hasErrors()) {
             errors.getAllErrors().stream().forEach(System.out::println);
