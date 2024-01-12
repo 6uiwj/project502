@@ -1,9 +1,8 @@
 package org.choongang.admin.config.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.controllers.BasicConfig;
-import org.choongang.admin.sersvice.ConfigInfoService;
-import org.choongang.admin.sersvice.ConfigSaveService;
+import org.choongang.admin.config.service.ConfigInfoService;
+import org.choongang.admin.config.service.ConfigSaveService;
 import org.choongang.commons.ExceptionProcessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +35,6 @@ public class BasicConfigController implements ExceptionProcessor {
     public String index(Model model) {
 
         BasicConfig config = infoService.get("basic", BasicConfig.class).orElseGet(BasicConfig::new);
-        System.out.println(config);
         model.addAttribute("basicConfig", config);
         return "admin/config/basic";
     }

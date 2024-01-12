@@ -29,6 +29,14 @@ public class Menu {
                 new MenuDetail("add_branch", "지점 등록", "/admin/reservation/add_branch"),
                 new MenuDetail("holiday", "휴무일 관리", "/admin/reservation/holiday")
         ));
+
+        //내코드
+        menus.put("reservation1", Arrays.asList(
+                new MenuDetail("list", "예약자 목록", "/admin/reservation1")
+        ));
+        //내코드 끝
+
+
     }
     //code: 주메뉴코드
     public static List<MenuDetail> getMenus(String code) {

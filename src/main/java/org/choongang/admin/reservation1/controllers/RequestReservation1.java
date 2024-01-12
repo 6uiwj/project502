@@ -12,7 +12,7 @@ public class RequestReservation1 {
 
         private long bookCode; //예약코드
 
-        private String donorNmae; //예약자이름
+        private String donorName; //예약자이름
 
         @NotBlank
         private long userNo; //회원번호

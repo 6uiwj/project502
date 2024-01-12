@@ -97,14 +97,15 @@ public class FileInfoService {
         long dir = seq % 10L;
         String fileName = seq + fileInfo.getExtension();
 
+        /* 파일 경로, URL S */
         String filePath = fileProperties.getPath() + dir + "/" + fileName;
         String fileUrl = request.getContextPath() +
                 fileProperties.getUrl() + dir + "/" + fileName;
 
         fileInfo.setFilePath(filePath);
         fileInfo.setFileUrl(fileUrl);
-
         /* 파일 경로, URL E */
+
         /* 썸네일 경로, URL S */
         List<String> thumbsPath = new ArrayList<>();
         List<String> thumbsUrl = new ArrayList<>();
