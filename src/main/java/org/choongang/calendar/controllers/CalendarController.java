@@ -27,7 +27,10 @@ public class CalendarController {
         Map<String, Object> data = calendar.getData(year, month);
         //맵에 킷값을 가지고 바로 접근
         model.addAllAttributes(data);
-        System.out.println(data);
+
+
+        model.addAttribute("addCss", new String[] { "calendar/style"});
+        model.addAttribute("addCommonScript", new String[] { "calendar" });
 
         return utils.tpl("calendar/index");
 

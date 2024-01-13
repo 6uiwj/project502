@@ -43,8 +43,8 @@ public class BasicConfigController implements ExceptionProcessor {
     @PostMapping
     public String save(BasicConfig config, Model model){
         saveService.save("basic", config);
-        model.addAttribute("message", "저장되었습니다.");
-        return "admin/config/basic";
+        model.addAttribute("message", "저장되었습니다."); //messge라는 이름으로 "저장되었습니다" 문자 저장
+        return "admin/config/basic"; //보여줄 뷰의 이름
     }
 
 }

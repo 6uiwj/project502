@@ -15,7 +15,7 @@ public class ConfigSaveService {
 
     public void save(String code, Object data) {
         Configs configs = repository.findById(code).orElseGet(Configs::new);
-
+        //있으면 code라는 컬럼=pK로 조회를 하고, 없으면 새로운 객체를 만든다.
         ObjectMapper om = new ObjectMapper();
         om.registerModule(new JavaTimeModule());
 

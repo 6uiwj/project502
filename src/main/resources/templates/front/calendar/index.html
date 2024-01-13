@@ -19,7 +19,7 @@
         <li th:each="yoil, status : ${yoilTitles}" th:text="${yoil}"
             th:classappend ="${status == 0 || status ==6 } ? 'red'" ></li>
     </ul>
-<ul>
+<ul class="days">
     <li th:each="day : ${days}">
         <span th:text="${day}"></span>
     </li>

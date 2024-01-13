@@ -69,22 +69,22 @@
                 th:field="*{bookYoil}">
                 <label for="bookYoil_1">일</label>
 
-                <input type="checkbox" name="bookYoil" value="월" id="bookYoil_2" th:field="*{bookYoil}>
+                <input type="checkbox" name="bookYoil" value="월" id="bookYoil_2" th:field="*{bookYoil}">
                 <label for="bookYoil_2">월</label>
 
-                <input type="checkbox" name="bookYoil" value="화" id="bookYoil_3" th:field="*{bookYoil}>
+                <input type="checkbox" name="bookYoil" value="화" id="bookYoil_3" th:field="*{bookYoil}">
                 <label for="bookYoil_3">화</label>
 
-                <input type="checkbox" name="bookYoil" value="수" id="bookYoil_4" th:field="*{bookYoil}>
+                <input type="checkbox" name="bookYoil" value="수" id="bookYoil_4" th:field="*{bookYoil}">
                 <label for="bookYoil_4">수</label>
 
-                <input type="checkbox" name="bookYoil" value="목" id="bookYoil_5" th:field="*{bookYoil}>
+                <input type="checkbox" name="bookYoil" value="목" id="bookYoil_5" th:field="*{bookYoil}">
                 <label for="bookYoil_5">목</label>
 
-                <input type="checkbox" name="bookYoil" value="금" id="bookYoil_6" th:field="*{bookYoil}>
+                <input type="checkbox" name="bookYoil" value="금" id="bookYoil_6" th:field="*{bookYoil}">
                 <label for="bookYoil_6">금</label>
 
-                <input type="checkbox" name="bookYoil" value="토" id="bookYoil_7" th:field="*{bookYoil}>
+                <input type="checkbox" name="bookYoil" value="토" id="bookYoil_7" th:field="*{bookYoil}">
                 <label for="bookYoil_7">토</label>
 
                 <div class="error" th:each="err : ${#fields.errors('bookYoil')}"
@@ -97,27 +97,27 @@
             <td>
                 <select name ="bookAvlShour" th:field="*{bookAvlShour}">
                     <option th:each="hour : ${#numbers.sequence(0,23)}"
-                        th:value=${#numbers.formatInteger(hour,2)}"
-                        th:text=${#numbers.formatInteger(hour,2)}">
+                        th:value="${#numbers.formatInteger(hour,2)}"
+                        th:text="${#numbers.formatInteger(hour,2)}">
                     </option>
                 </select>
                 :
                 <select name ="bookAvlSmin" th:field="*{bookAvlSmin}">
                     <option th:each="min : ${#numbers.sequence(0,50,10)}"
-                            th:value=${#numbers.formatInteger(min,2)}"
-                            th:text=${#numbers.formatInteger(min,2)}">
+                            th:value="${#numbers.formatInteger(min,2)}"
+                            th:text="${#numbers.formatInteger(min,2)}">
                 </select>
                 ~
                 <select name="bookAvlEhour" th:field="*{bookAvlEhour}">
                     <option th:each="hour : ${#numbers.sequence(0,23)}"
-                            th:value=${#numbers.formatInteger(hour,2)}"
-                            th:text=${#numbers.formatInteger(hour,2)}">
+                            th:value="${#numbers.formatInteger(hour,2)}"
+                            th:text="${#numbers.formatInteger(hour,2)}">
                 </select>
                 :
                 <select name="bookAvlEmin" th:field="*{bookAvlEmin}">
                     <option th:each="min : ${#numbers.sequence(0,50,10)}"
-                            th:value=${#numbers.formatInteger(min,2)}"
-                            th:text=${#numbers.formatInteger(min,2)}">
+                            th:value="${#numbers.formatInteger(min,2)}"
+                            th:text="${#numbers.formatInteger(min,2)}">
                 </select>
             </td>
         </tr>
@@ -150,8 +150,8 @@
             <td>
                 <select name="bookBlock" th:field="*{bookBlock}">
                     <option th:each="min : ${#numbers.sequence(0,50,10)}"
-                            th:value=${#numbers.formatInteger(min,2)}"
-                            th:text=${#numbers.formatInteger(min,2)}">
+                            th:value="${#numbers.formatInteger(min,2)}"
+                            th:text="${#numbers.formatInteger(min,2)}">
                     </option>
                 </select>분
 
