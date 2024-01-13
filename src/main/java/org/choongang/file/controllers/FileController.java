@@ -37,7 +37,7 @@ public class FileController implements ExceptionProcessor {
     //바디에 출력되던 데이터를 화면이 아니라 파일로 바꿈
     @ResponseBody
     @RequestMapping("/download/{seq}")
-    public void download(@PathVariable("sdq") Long seq) {
+    public void download(@PathVariable("seq") Long seq) {
 
         //바디에 출력데이터가 화면이 아닌 filename=test.txt 여기로 바뀜??
         //출력방향 바꾸기
