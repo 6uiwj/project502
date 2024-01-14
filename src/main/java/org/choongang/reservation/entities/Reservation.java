@@ -1,7 +1,7 @@
 package org.choongang.reservation.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import org.choongang.branch.entities.Center;
 import org.choongang.commons.entities.Base;
 import org.choongang.member.entities.Member;
@@ -10,6 +10,7 @@ import org.choongang.center.constants.DonationType;
 import java.time.LocalDateTime;
 @Data
 @Entity
+@NoArgsConstructor
 public class Reservation extends Base {
 
     @Id
