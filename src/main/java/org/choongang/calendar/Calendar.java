@@ -1,10 +1,12 @@
 package org.choongang.calendar;
 
+import org.choongang.commons.Utils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.*;
-
+@Lazy
 @Component
 //@Lazy //매번객체를 만들 필요없이 처음 사용할 때만 객체를 만듦.
 public class Calendar {
@@ -20,7 +22,7 @@ public class Calendar {
      */
     public Map<String, Object> getData(Integer _year, Integer _month) {
             int year, month = 0;
-            if(_year==null && _month==null) { //연도와 월 값이 없으면 현재 년도, 월로 고정
+            if(_year==null && _month==null) { //연도와 월 입력값이 없으면 현재 년도, 월로 고정
                 LocalDate today = LocalDate.now();
                 year = today.getYear();
                 month = today.getMonthValue();
@@ -44,18 +46,20 @@ public class Calendar {
             List<Integer> days = new ArrayList<>(); //날짜 1, 2, 3
             List<String> dates = new ArrayList<>(); //날짜 문자열 2024-01-12
             List<Integer> yoils = new ArrayList<>(); //요일 정보
-
+            //start: 달력 1번째줄 1번째칸 : -N
+            //달력 블록안의 숫자의 개수만큼
             for ( int i = start; i < cellNum + start ; i++) {
-                LocalDate date = sdate.plusDays(i);
+                System.out.println(i);
+                LocalDate date = sdate.plusDays(i); //블록안의 모든 날짜 출력
 
-                int yoil = date.getDayOfWeek().getValue();
+                int yoil = date.getDayOfWeek().getValue(); //모든 날짜의 요일 출력
                 yoil = yoil == 7 ? 0 : yoil; //0~6(일~토)
 
-                days.add(date.getDayOfMonth());
-                dates.add(date.toString());
-                yoils.add(yoil);
+                days.add(date.getDayOfMonth()); //일(1, 2, ...) days 리스트에 담기
+                dates.add(date.toString()); //날짜(2024-01-13) dates 리스트에 담기
+                yoils.add(yoil); //요일(일=0, 월=1..) yoils 리스트에 담기
 
-                data.put("days", days);
+                data.put("days", days); //map에 넣기
                 data.put("dates", dates);
                 data.put("yoils", yoils);
                 }
@@ -75,23 +79,31 @@ public class Calendar {
                 data.put("year", year);
                 data.put("month", month);
 
-                //요일 제목
+                //요일 제목(getYoilㅁ ㅔ서드 실행 (리스트형태로 월~일을 담고 있음 )
                 data.put("yoilTitles", getYoils());
 
                 return data;
     }
 
-    //매개변수가 없을 때에는 현재 날짜와 연도로 고정
+    /**
+     * 매개변수가 없는 데이터는 현재 일자 기준의 년도, 월로 달력 데이터 생성
+     *
+     * @return
+     */
     public Map<String, Object> getData() {
-
-        //return getData(today.getYear(), today.getMonthValue());
-        return getData(0,0);
+        return getData(null, null);
     }
 
     public List<String> getYoils() {
 
         return Arrays.asList(
-          "일", "월", "화", "수", "목", "금", "토"
+                Utils.getMessage("일", "commons"),
+                Utils.getMessage("월", "commons"),
+                Utils.getMessage("화", "commons"),
+                Utils.getMessage("수", "commons"),
+                Utils.getMessage("목", "commons"),
+                Utils.getMessage("금", "commons"),
+                Utils.getMessage("토", "commons")
         );
     }
 }

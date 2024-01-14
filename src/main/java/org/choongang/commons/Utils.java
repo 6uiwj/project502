@@ -61,7 +61,7 @@ public class Utils {
 
     public static String getMessage(String code, String type)
     {
-        type=StringUtils.hasText(type) ? type : "validaions";
+        type=StringUtils.hasText(type) ? type : "validations";
 
         ResourceBundle bundle = null;
         if(type.equals("commons")) {

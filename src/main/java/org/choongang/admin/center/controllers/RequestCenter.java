@@ -1,4 +1,4 @@
-package org.choongang.admin.reservation.controllers;
+package org.choongang.admin.center.controllers;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -6,9 +6,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class RequestBranch{
+public class RequestCenter {
 
-    private String mode = "add_branch"; //모드의 기본값 설정
+    private String mode = "add_center"; //모드의 기본값 설정
 
     private Long cCode; // 지점 코드
 

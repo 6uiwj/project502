@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz.thymeleaf/layout">
+<head>
+    <!--meta태그 : 설정관련-->
+    <meta charset="UTF-8">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <!--"siteConfig"라는 변수에 저장된 정보에서 siteDescription(BasicConfig 커맨드 객체의 필드)이라는 정보를 불러옴 -->
+    <meta th:if="${siteConfig.siteDescription != null}" name="description" th:content="${siteConfig.siteDescription}">
+    <meta th:if="${siteConfig.siteKeywords != null}" name="keywords" th:content="${siteConfig.siteKeywords}">
+    <title>
+        <th:block th:if="${pageTitle != null}" th:text="${pageTitle + ' - '}"></th:block>
+        <th:block th:if="${siteConfig.siteTitle != null}" th:text="${siteConfig.siteTitle}"></th:block>
+    </title>
+    <link rel="stylesheet" type="text/css" th:href="@{/common/css/popup_style.css?v={v}(v=${siteConfig.cssJsVersion})}">
+    <link rel="stylesheet" type="text/css"
+          th:each="cssFile : ${addCommonCss}"
+          th:href="@{/common/css/{file}.css?v={v}(file=${cssFile}, v=${siteConfig.cssJsVersion})}">
+
+    <link rel="stylesheet" type="text/css" th:href="@{/front/css/popup_style.css?v={v}(v=${siteConfig.cssJsVersion})}">
+    <link rel="stylesheet" type="text/css"
+          th:each="cssFile : ${addCss}"
+          th:href="@{/front/css/{file}.css?v={v}(file=${cssFile}, v=${siteConfig.cssJsVersion})}">
+
+    <th:block layout:fragment="addCss"></th:block>
+
+    <script th:src="@{/common/js/common.js?v={v}(v=${siteConfig.cssJsVersion})}"></script>
+    <script th:each="jsFile : ${addCommonScript}"
+            th:src="@{/common/js/{file}.js?v={v}(file=${jsFile}, v=${siteConfig.cssJsVersion})}"></script>
+
+    <script th:src="@{/front/js/common.js?v={v}(v=${siteConfig.cssJsVersion})}"></script>
+    <script th:each="jsFile : ${addScript}"
+            th:src="@{/front/js/{file}.js?v={v}(file=${jsFile}, v=${siteConfig.cssJsVersion})}"></script>
+
+    <th:block layout:fragment="addScript"></th:block>
+</head>
+<main layout:fragment="content"></main>
+</body>
+</html>
