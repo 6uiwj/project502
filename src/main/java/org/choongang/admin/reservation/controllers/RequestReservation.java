@@ -1,12 +1,10 @@
-package org.choongang.admin.reservation1.controllers;
+package org.choongang.admin.reservation.controllers;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-
-public class RequestReservation1 {
+@Data
+public class RequestReservation {
     //예약 관리자페이지 커맨드 객체
-    @Data
-    public class RequestReservation {
 
         private String mode = "edit_booking"; //모드: 예약 수정
 
@@ -31,4 +29,4 @@ public class RequestReservation1 {
         private String bookMin; // 예약 분
 
     }
-}
+

@@ -5,19 +5,19 @@ import lombok.Data;
 import org.choongang.branch.entities.Center;
 import org.choongang.commons.entities.Base;
 import org.choongang.member.entities.Member;
-import org.choongang.reservation.constants.DonationType;
+import org.choongang.center.constants.DonationType;
 
 import java.time.LocalDateTime;
-
-@Entity
 @Data
-//날짜와시간이 필요하므로 Base 상속
+@Entity
 public class Reservation extends Base {
-    @Id @GeneratedValue
+
+    @Id
+    @GeneratedValue
     private Long bookCode; //예약 코드
 
     //한명이 여러군데에 예약할 수 있으니까...
-    @ManyToOne (fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_seq") //이거확인
     private Member member; //회원은 회원쪽 매핑
 
@@ -36,3 +36,4 @@ public class Reservation extends Base {
 
     private LocalDateTime bookDateTime;
 }
+

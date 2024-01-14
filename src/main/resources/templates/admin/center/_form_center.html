@@ -1,11 +1,11 @@
 <!--공유할 양식-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="form" th:object="${requestBranch}">
+<th:block th:fragment="form" th:object="${requestCenter}">
     <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
     <h2>기본 정보</h2>
     <table class="table_cols mb30">
-        <tr th:if="*{mode == 'edit_branch' && cCode != null}">
+        <tr th:if="*{mode == 'edit_center' && cCode != null}">
             <th>지점 코드</th>
             <td>
                 <input type="hidden" name="cCode" th:field="*{cCode}">

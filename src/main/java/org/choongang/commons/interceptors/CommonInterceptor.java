@@ -58,6 +58,7 @@ public class CommonInterceptor implements HandlerInterceptor {
         }
     }
 
+    //사이트 설정정보를 요청정보에 담아 보내는 메서드인가?!
     private void loadSiteConfig(HttpServletRequest request) {
         String[] excludes = {".js", ".css", ".png", ".jpg", ".jpeg", "gif", ".pdf", ".xls",
         ".xlxs", ".ppt"}; //URL에 이런 파일이 추가되었다면 이 파일들은 설정을 공유할 필요가 없다?(로드배제)
