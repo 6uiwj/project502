@@ -15,7 +15,7 @@ public class ReservationInfoService {
 
     //예약자 이름(Member엔티티의 name값으로 조회)
     public Reservation get(Member member) {
-       Reservation reservation = reservationRepository.findByName(member.getName());
+       Reservation reservation = reservationRepository.findByMemberName(member.getName());
 
        return reservation;
 

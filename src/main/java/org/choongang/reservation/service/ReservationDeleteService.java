@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class ReservationDeleteService {
     private final ReservationRepository reservationRepository;
     public Reservation delete(Member member) {
-        Reservation reservation = reservationRepository.findByName(member.getName());
+        Reservation reservation = reservationRepository.findByMemberName(member.getName());
         this.reservationRepository.delete(reservation);
 
         return reservation;
