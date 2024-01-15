@@ -1,4 +1,4 @@
-package org.choongang.board.service;
+package org.choongang.board.service.config;
 
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.board.controllers.RequestBoardConfig;

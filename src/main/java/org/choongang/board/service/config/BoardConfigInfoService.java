@@ -1,4 +1,4 @@
-package org.choongang.board.service;
+package org.choongang.board.service.config;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
