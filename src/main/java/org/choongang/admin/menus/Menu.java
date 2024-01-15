@@ -25,8 +25,9 @@ public class Menu {
 
 
         //내코드
-        menus.put("reservation1", Arrays.asList(
-                new MenuDetail("list", "예약자 목록", "/admin/reservation1")
+        menus.put("reservation", Arrays.asList(
+                new MenuDetail("list", "예약자 목록", "/admin/reservation"),
+                new MenuDetail("add", "예약자 추가", "/admin/reservation/add")
         ));
         //내코드 끝
 

@@ -30,9 +30,10 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
 	implementation 'net.coobird:thumbnailator:0.4.20'
+    testImplementation 'org.projectlombok:lombok:1.18.28'
 
 
-	runtimeOnly 'com.oracle.database.jdbc:ojdbc11:23.3.0.23.09'
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc11:23.3.0.23.09'
 	implementation 'com.oracle.database.nls:orai18n:23.3.0.23.09'
 
 	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
