@@ -1,4 +1,4 @@
-package org.choongang.board.service;
+package org.choongang.board.service.config;
 
 import org.choongang.commons.Utils;
 import org.choongang.commons.exceptions.AlertBackException;
