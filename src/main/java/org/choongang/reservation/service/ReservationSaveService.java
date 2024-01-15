@@ -7,6 +7,7 @@ import org.choongang.reservation.entities.Reservation;
 import org.choongang.reservation.repositories.ReservationRepository;
 import org.springframework.stereotype.Service;
 
+//예약하고 싶은 회원의 정보를 받아서 예약정보를 저장하는 서비스
 @Service
 @RequiredArgsConstructor
 public class ReservationSaveService {
