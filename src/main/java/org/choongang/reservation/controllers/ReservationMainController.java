@@ -31,17 +31,21 @@ public class ReservationMainController {
         return utils.tpl("reservation/center_choice");
     }
 
+    /*
     @GetMapping("/time_choice")
     public String timeChoicePage() {
+
         return utils.tpl("reservation/time_choice");
     }
 
+
+     */
     @GetMapping("/userInfo_check")
     public String userInfoCheckPage() {
         return utils.tpl("reservation/userInfo_check");
     }
 
-    @GetMapping
+    @GetMapping("/time_choice")
     public String index(@RequestParam(name="year", required = false) Integer year,
                         @RequestParam(name="month", required = false) Integer month, Model model) {
         //쿼리스트링으로 연과 월을 넣엊루 것임

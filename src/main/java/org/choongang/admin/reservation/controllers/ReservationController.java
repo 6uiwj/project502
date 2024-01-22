@@ -2,7 +2,6 @@ package org.choongang.admin.reservation.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.choongang.admin.board.controllers.RequestBoardConfig;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.commons.ExceptionProcessor;
@@ -25,6 +24,7 @@ public class ReservationController implements ExceptionProcessor {
 
         private final ReservationInfoService infoService;
         private final ReservationSaveService saveService;
+        private final ReservationValidator validator;
 
         //주메뉴 불러오기
         @ModelAttribute("menuCode")
@@ -80,10 +80,11 @@ public class ReservationController implements ExceptionProcessor {
             String mode = form.getMode();
             //여기 유효성 검사안함...ㅎㅎ
             commonProcess(mode, model);
-
+            validator.validate(form,errors);
 
 
             if (errors.hasErrors()) {
+                errors.getAllErrors().stream().forEach(System.out::println);
                 return "admin/reservation/" + mode;
             }
 

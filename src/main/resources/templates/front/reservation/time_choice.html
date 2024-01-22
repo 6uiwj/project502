@@ -26,8 +26,31 @@
 
     <h2>예약 날짜 선택</h2>
         오늘 날짜 이후 한달 이내로 선택이 가능합니다.<br>
-    달력은 또어디감...
-   <div th:replace="~{front/calendar/index::calendar}"></div>
+    <div class="year_month">
+        <a th:href="@{/reservation/time_choice(year=${prevYear}, month=${prevMonth}, targetId=${param.targetId})}"
+           th:text="#{이전달}"></a>
+        <span class="current">
+            <th:block th:text="${year}"></th:block>
+            <th:block th:text="#{년}"></th:block>
+
+            <th:block th:text="${#numbers.formatInteger(month, 2)}"></th:block>
+            <th:block th:text="#{월}"></th:block>
+        </span>
+        <a th:href="@{/reservation/time_choice(year=${nextYear}, month=${nextMonth}, targetId=${param.targetId})}"
+           th:text="#{다음달}"></a>
+    </div>
+
+    <ul class="yoils">
+        <li th:each="yoil, status : ${yoilTitles}" th:text="${yoil}"></li>
+    </ul>
+
+    <ul class="days">
+        <li th:each="day, status  : ${days}">
+            <div th:text="${day}" class="day" th:data-date="${dates[status.index]}"
+                 th:id="'date_' + ${status.index}"></div>
+        </li>
+    </ul>
+
     <h2>예약 시간 선택</h2>
     <fieldset>
     <table>
@@ -48,4 +71,14 @@
     <button>다음</button>
 
 </section>
+<script>
+    for(let i = 0; i<${days}; i++){
+
+        var t = document.getElementById('date_');
+        document.getElementById('target');
+    if(t.addEventListener){
+        t.addEventListener('click', function(event){
+            alert('Hello world, '+event.target.value);
+        });
+</script>
 </html>
