@@ -43,7 +43,7 @@ public class MemberController implements ExceptionProcessor {
         model.addAttribute("items", data.getItems()); //목록
         model.addAttribute("pagination",data.getPagination());//페이징
 
-        //model.addAttribute("subMenuCode", "list"); //메뉴 ㅎ.뭔데..
+        //model.addAttribute("subMenuCode", "list");
         return "admin/member/list";
 
     }

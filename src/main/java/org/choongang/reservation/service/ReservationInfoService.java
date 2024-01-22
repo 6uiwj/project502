@@ -29,8 +29,7 @@ public class ReservationInfoService {
     private final ReservationRepository reservationRepository;
     private final HttpServletRequest request;
 
-    //예약자 이름(Member엔티티의 name값으로 조회)
-
+    //예약코드로 조회 (기본키)
     public Reservation get(Long bookCode) {
 
         Reservation reservation = reservationRepository.findById(bookCode).orElseThrow(ReservationNotFoundException::new);
@@ -40,10 +39,11 @@ public class ReservationInfoService {
         return reservation;
     }
 
+    //조건 조회
     public ListData<Reservation> getList(ReservationSearch search) {
 
         QReservation reservation = QReservation.reservation;
-        BooleanBuilder andBuilder = new BooleanBuilder();
+        BooleanBuilder andBuilder = new BooleanBuilder(); //조건식을 쓰기 위해
 
         /* 검색 조건 처리 S */
 

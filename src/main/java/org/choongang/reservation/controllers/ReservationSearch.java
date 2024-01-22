@@ -8,9 +8,10 @@ import java.util.List;
 @Data
 public class ReservationSearch {
     private int page = 1;
-    private int limit = 20;
+    private int limit = 20; //1페이지 게시글 개수,
 
-    private List<Long> memberSeq;
+    //검색옵션
+    private List<Long> memberSeq; //멤버엔티티의 seq필드?
     private List<String> userId;
 
     private List<Long> bookCode;
