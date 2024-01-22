@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{front/layouts/main}">
-<main layout:fragment="content">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<main>
 
     <input type="text" id="sdate">
 
@@ -11,5 +10,7 @@
         const sdate = document.getElementById("sdate");
         sdate.onfocus = () => popup.open('/calendar?targetId=sdate', 350, 400);
     </script>
+</th:block>
+
 </main>
 </html>

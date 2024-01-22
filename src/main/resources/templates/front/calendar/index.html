@@ -2,7 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{front/layouts/popup}">
+
 <main layout:fragment="content" class="popup_calendar">
+    <th:block th:fragment="calendar">
+
     <div class="year_month">
         <a th:href="@{/calendar(year=${prevYear}, month=${prevMonth}, targetId=${param.targetId})}"
            th:text="#{이전달}"></a>
@@ -26,5 +29,8 @@
             <div th:text="${day}" class="day" th:data-date="${dates[status.index]}"></div>
         </li>
     </ul>
+</th:block>
+
 </main>
+
 </html>

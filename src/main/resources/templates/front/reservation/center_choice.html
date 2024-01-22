@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+
+<section layout:fragment="content">
+    <h1>헌혈의 집 선택</h1>
+<hr>
+    <form name="frmLocSearch" >
+        <table class="table_cols mb30" >
+            <tr>
+                <th>지역선택</th>
+                <td>
+                    <div class="input_grp">
+                        도/시
+                        <select name="sopt" >
+                            <option value="ALL">선택하기</option>
+                            <option value="bid">게시판 ID</option>
+                            <option value="bName">게시판명</option>
+                        </select>
+                        시/군/구
+                        <select name="sopt" >
+                            <option value="ALL">선택하기</option>
+                            <option value="bid">게시판 ID</option>
+                            <option value="bName">게시판명</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>운영시간</th>
+            <td>
+                    <input type="checkbox" name="bookTime" value="주말/공휴일" id="holiday" >
+                    <label for=holiday>주말/공휴일</label>
+                    <input type="checkbox" name="bookTime" value="평일" id="weekday" >
+                    <label for=weekday>평일</label>
+                    <input type="checkbox" name="bookTime" value="18시이후" id="night" >
+                    <label for=night>18시 이후 운영</label>
+                </div>
+            </td>
+            </tr>
+            <tr>
+            <th>키워드</th>
+                <td>
+                    <div class="search">
+            <input type="text" name="skey" >
+                    <button type="submit" class="btn">검색하기</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <hr>
+
+    <h1>아니 지도 어디갔냐고요오오ㅗㅇ</h1>
+<hr>
+    <h2>조회 결과</h2>
+    <table class="table_rows">
+        <thead>
+        <tr>
+
+            <th width="100">지역</th>
+            <th>센터명</th>
+            <th width="350">운영날짜</th>
+            <th width="250">주소</th>
+            <th width="250">전화번호</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+
+        </tbody>
+    </table>
+<hr>
+    <button>이전</button>
+    <button>다음</button>
+</section>
+</html>

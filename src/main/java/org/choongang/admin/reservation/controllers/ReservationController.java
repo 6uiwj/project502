@@ -1,20 +1,30 @@
 package org.choongang.admin.reservation.controllers;
 
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.choongang.admin.board.controllers.RequestBoardConfig;
 import org.choongang.admin.menus.Menu;
 import org.choongang.admin.menus.MenuDetail;
 import org.choongang.commons.ExceptionProcessor;
+import org.choongang.commons.ListData;
+import org.choongang.reservation.controllers.ReservationSearch;
+import org.choongang.reservation.entities.Reservation;
+import org.choongang.reservation.service.ReservationInfoService;
+import org.choongang.reservation.service.ReservationSaveService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
 @Controller
 @RequestMapping("/admin/reservation")
+@RequiredArgsConstructor
 public class ReservationController implements ExceptionProcessor {
+
+        private final ReservationInfoService infoService;
+        private final ReservationSaveService saveService;
 
         //주메뉴 불러오기
         @ModelAttribute("menuCode")
@@ -36,8 +46,12 @@ public class ReservationController implements ExceptionProcessor {
          * @return
          */
         @GetMapping
-        public String list(Model model) {
+        public String list(@ModelAttribute ReservationSearch search, Model model) {
             commonProcess("list", model);
+            ListData<Reservation> data = infoService.getList(search);
+
+            model.addAttribute("items", data.getItems()); //목록
+            model.addAttribute("pagination",data.getPagination());//페이징
 
             return "admin/reservation/list";
         }
@@ -48,23 +62,56 @@ public class ReservationController implements ExceptionProcessor {
          * @param model
          * @return
          */
-        @GetMapping("/add")
+        @GetMapping("/add_reservation")
         public String addReservation(Model model) {
-            commonProcess("add",model);
+            commonProcess("add_reservation",model);
             return "admin/reservation/add_reservation";
         }
 
 
         /**
-         * 예약 추가, 저장
+         * 예약 저장
          * @param model
          * @return
          */
 
         @PostMapping("/save_reservation")
-        public String saveBranch(Model model) {
+        public String saveReservation(@Valid RequestReservation form, Errors errors, Model model) {
+            String mode = form.getMode();
+            //여기 유효성 검사안함...ㅎㅎ
+            commonProcess(mode, model);
+
+
+
+            if (errors.hasErrors()) {
+                return "admin/reservation/" + mode;
+            }
+
+            Reservation data = saveService.save(form);
             return "redirect:/admin/reservation";
         }
+
+
+    /**
+     * 예약 수정
+     * @param bookCode
+     * @param model
+     * @return
+     */
+
+        @GetMapping("/edit/{bookCode}")
+        public String edit(@PathVariable("bookCode") Long bookCode, Model model) {
+            commonProcess("edit_reservation", model);
+
+            RequestReservation form = infoService.getForm(bookCode);
+            System.out.println(form);
+            model.addAttribute("requestReservation", form);
+
+
+
+            return "admin/reservation/edit_reservation";
+        }
+
 
 
 
@@ -83,7 +130,7 @@ public class ReservationController implements ExceptionProcessor {
                 pageTitle = "예약정보 수정";
 
 
-            } else if(mode.equals("add")) {
+            } else if(mode.equals("add_reservation")) {
                 pageTitle = "예약 등록";
             }
             model.addAttribute("pageTitle", pageTitle);
