@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{front/layouts/main}">
+<section layout:fragment="content">
+    <h1>예약 날짜 및 시간 선택</h1>
+    <h2>선택 헌혈의 집 정보</h2>
+    <form name="timeChoice" method="get" th:action="@{/reservation/time_choice}" autocomplete="off" th:object="${centerInfo}">
+        <fieldset>
+            <table>
+                <tr>
+                    <th scope="row">센터명</th>
+                    <td> 센터명 가져오기 </td>
+                </tr>
+                <tr>
+                    <th scope="row">위치</th>
+                    <td>센터 주소 가져오기 </td>
+                </tr>
+                <tr>
+                <th scope="row">전화번호</th>
+                <td>센터 전화번호 가져오기</td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+
+    <h2>예약 날짜 선택</h2>
+        오늘 날짜 이후 한달 이내로 선택이 가능합니다.<br>
+    달력은 또어디감...
+   <div th:replace="~{front/calendar/index::calendar}"></div>
+    <h2>예약 시간 선택</h2>
+    <fieldset>
+    <table>
+        <col style= "width:80px">
+        <tr>
+            <td>10:00</td>
+            <td>10:20</td>
+            <td>10:40</td>
+        </tr>
+        <tr>
+            <td>11:00</td>
+            <td>11:20</td>
+            <td>11:40</td>
+        </tr>
+    </table>
+    </fieldset>
+    <button>이전</button>
+    <button>다음</button>
+
+</section>
+</html>

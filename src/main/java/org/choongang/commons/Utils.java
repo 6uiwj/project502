@@ -1,17 +1,16 @@
 package org.choongang.commons;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.config.controllers.BasicConfig;
+import org.choongang.admin.config.service.ConfigInfoService;
 import org.choongang.file.service.FileInfoService;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -20,6 +19,7 @@ public class Utils {
     private final HttpServletRequest request;
     private final HttpSession session;
     private  FileInfoService fileInfoService;
+    private final ConfigInfoService infoService;
 
     //3가지 메시지 번들 가져오기 (messages > *.properties 파일들)
     private static final ResourceBundle commonsBundle;
@@ -143,5 +143,20 @@ public class Utils {
      */
     public static int onlyPositiveNumber(int num, int replace) {
         return num < 1 ? replace : num;
+    }
+
+    /**
+     * API 설정 조회
+     *
+     * @param key
+     * @return
+     *
+     */
+    public String getApiConfig(String key) {
+        Map<String, String> config = infoService.get("apiConfig", new TypeReference<Map<String, String>>() {
+        }).orElse(null);
+        if (config == null) return "bf7aec0c3a4f12640bb15901ed8550f7";
+
+        return config.getOrDefault(key, "");
     }
 }

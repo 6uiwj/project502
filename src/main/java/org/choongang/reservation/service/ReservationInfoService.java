@@ -1,8 +1,13 @@
 package org.choongang.reservation.service;
 
 import com.querydsl.core.BooleanBuilder;
+import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpServletRequest;
+import jdk.jshell.execution.Util;
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.board.controllers.RequestBoardConfig;
+import org.choongang.admin.reservation.controllers.RequestReservation;
+import org.choongang.board.entities.Board;
 import org.choongang.commons.ListData;
 import org.choongang.commons.Pagination;
 import org.choongang.commons.Utils;
@@ -10,6 +15,8 @@ import org.choongang.reservation.controllers.ReservationSearch;
 import org.choongang.reservation.entities.QReservation;
 import org.choongang.reservation.entities.Reservation;
 import org.choongang.reservation.repositories.ReservationRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +35,8 @@ import static org.springframework.data.domain.Sort.Order.desc;
 public class ReservationInfoService {
     private final ReservationRepository reservationRepository;
     private final HttpServletRequest request;
+    private Util util;
+    EntityManager em;
 
     //예약자 이름(Member엔티티의 name값으로 조회)
 
@@ -38,6 +47,30 @@ public class ReservationInfoService {
         // 추가 처리
 
         return reservation;
+    }
+
+
+
+    public RequestReservation getForm(Long bookCode){
+        Reservation reservation = get(bookCode); //사용자가 요청한 bookCode와 일치하는 정보를 DB에서 가져옴
+
+        //DB에 조회한 내용을 커맨드객체에 담는다(=RequestReservation)
+        RequestReservation form = new ModelMapper().map(reservation, RequestReservation.class);
+
+        form.setBookCode(reservation.getBookCode());
+        form.setBookCode(reservation.getBookCode());
+        form.setDonorName(reservation.getMember().getName());
+        form.setDonerTel(reservation.getDonnerTel());
+        form.setBookType(reservation.getBookType().name());
+        form.setCenter(reservation.getCenter().getCName());
+        //예약시간은 커맨드객체에 예약날짜(bookDate)+예약 시간(bookHour)+예약분(bookMin)으로 쪼개져 있는데
+        //엔티티에선 LocaldateTime bookDateTime으로 합쳐져 있는데 어떻게 담지..
+
+        form.setMode("edit_reservation");
+
+
+
+        return null;
     }
 
     public ListData<Reservation> getList(ReservationSearch search) {

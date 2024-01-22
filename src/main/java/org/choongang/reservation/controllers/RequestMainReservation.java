@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class RequestReservation {
+public class RequestMainReservation {
 
     private String mode = "add";
 

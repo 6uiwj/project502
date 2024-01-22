@@ -2,9 +2,9 @@ package org.choongang.reservation.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.choongang.admin.reservation.controllers.RequestReservation;
 import org.choongang.center.constants.DonationType;
 import org.choongang.member.MemberUtil;
-import org.choongang.reservation.controllers.RequestReservation;
 import org.choongang.reservation.entities.Reservation;
 import org.choongang.reservation.repositories.ReservationRepository;
 import org.springframework.stereotype.Service;
@@ -22,24 +22,24 @@ public class ReservationSaveService {
 
 
         String mode = form.getMode();
-        mode = StringUtils.hasText(mode) ? mode : "add";
+        mode = StringUtils.hasText(mode) ? mode : "add_reservation";
         Long bookCode = form.getBookCode();
 
-        Reservation reservation = null;
-        if (mode.equals("edit") && bookCode != null) {
-            reservation = reservationRepository.findById(bookCode).orElseThrow(ReservationNotFoundException::new);
+        Reservation data = null;
+        if (mode.equals("edit_reservation") && bookCode != null) {
+            data = reservationRepository.findById(bookCode).orElseThrow(ReservationNotFoundException::new);
         } else {
-            reservation = new Reservation();
-            reservation.setMember(memberUtil.getMember());
+            data =new Reservation();
+            data.setMember(memberUtil.getMember());
         }
 
-        reservation.setDonnerTel(form.getDonnerTel());
-        reservation.setBookType(DonationType.valueOf(form.getBookType()));
+        data.setDonnerTel(form.getDonerTel());
+        data.setBookType(DonationType.valueOf(form.getBookType()));
 
 
-        reservationRepository.saveAndFlush(reservation);
+        reservationRepository.saveAndFlush(data);
 
-        return reservation;
+        return data;
     }
 
 }
