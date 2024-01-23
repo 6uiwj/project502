@@ -59,6 +59,8 @@ input[type='email'],
 input[type='password'] { border: 1px solid #d5d5d5; height: 35px; padding: 0 10px; width: 100%; }
 textarea { border: 1px solid #d5d5d5; min-height: 200px; padding: 10px; resize: none; width: 100%; }
 select { border: 1px solid #d5d5d5; height: 35px; }
+
+.input_grp { display: flex; align-items: center; }
 /* 입력 공통 E */
 
 /* 버튼 공통 S */

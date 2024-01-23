@@ -10,6 +10,9 @@ import org.choongang.reservation.repositories.ReservationRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 //예약하고 싶은 회원의 정보를 받아서 예약정보를 저장하는 서비스
 @Service
 @RequiredArgsConstructor
@@ -33,7 +36,8 @@ public class ReservationSaveService {
             data.setMember(memberUtil.getMember());
         }
 
-        data.setDonnerTel(form.getDonerTel());
+        String donorTel = Arrays.stream(form.getDonorTel()).collect(Collectors.joining("-"));
+        data.setDonorTel(donorTel);
         data.setBookType(DonationType.valueOf(form.getBookType()));
 
 

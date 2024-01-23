@@ -17,6 +17,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,12 +46,14 @@ public class ReservationInfoService {
         Reservation reservation = get(bookCode); //사용자가 요청한 bookCode와 일치하는 정보를 DB에서 가져옴
 
         //DB에 조회한 내용을 커맨드객체에 담는다(=RequestReservation)
+        //modelMapper : 객체 간의 매핑을 도와줌(reservation 객체를 RequestReservation 클래스로 매핑함) -> 일치하는 부분에 대해서만 자동 매핑함
         RequestReservation form = new ModelMapper().map(reservation, RequestReservation.class);
 
-        form.setBookCode(reservation.getBookCode());
+        String donorTel = reservation.getDonorTel();
+
         form.setBookCode(reservation.getBookCode());
         form.setDonorName(reservation.getMember().getName());
-        form.setDonerTel(reservation.getDonnerTel());
+        form.setDonorTel(StringUtils.hasText(donorTel) ? donorTel.split("-") : null);
         form.setBookType(reservation.getBookType().name());
         form.setCenter(reservation.getCenter().getCName());
         //예약시간은 커맨드객체에 예약날짜(bookDate)+예약 시간(bookHour)+예약분(bookMin)으로 쪼개져 있는데
@@ -60,7 +63,7 @@ public class ReservationInfoService {
 
 
 
-        return null;
+        return form;
     }
     //조건 조회
     public ListData<Reservation> getList(ReservationSearch search) {

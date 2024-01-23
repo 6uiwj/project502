@@ -63,8 +63,8 @@ public class ReservationController implements ExceptionProcessor {
          * @return
          */
         @GetMapping("/add_reservation")
-        public String addReservation(Model model) {
-            commonProcess("add_reservation",model);
+        public String addReservation(@ModelAttribute RequestReservation form, Model model) {
+            commonProcess("add",model);
             return "admin/reservation/add_reservation";
         }
 
@@ -131,7 +131,7 @@ public class ReservationController implements ExceptionProcessor {
                 pageTitle = "예약정보 수정";
 
 
-            } else if(mode.equals("add_reservation")) {
+            } else if(mode.equals("add")) {
                 pageTitle = "예약 등록";
             }
             model.addAttribute("pageTitle", pageTitle);

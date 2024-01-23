@@ -29,6 +29,7 @@
     </form>
 
     <h2>예약자 목록</h2>
+    여기에서 예약변경 란에 수정하기 삭제하기 버튼을 만들어 줄 것임
 <form name="frmList" method="post" th:action="@{/admin/reservation}" target="ifrmProcess" autocomplete="off">
 
     <table class="table_rows">
@@ -57,7 +58,7 @@
             <td th:text="*{bookCode}" align="center"></td>
             <td th:text="*{member.name}" align="center"></td>
             <td th:text="*{bookDateTime}" align="center"></td>
-            <td th:text="*{donnerTel}" align="center"></td>
+            <td th:text="*{donorTel}" align="center"></td>
             <td th:text="*{bookType}" align="center"></td>
             <td th:text="*{center.cName}" align="center"></td>
             <td>

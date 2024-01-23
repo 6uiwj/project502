@@ -14,7 +14,7 @@ public class RequestMainReservation {
     private String name;
 
     @NotBlank
-    private String donnerTel;
+    private String donorTel;
     private String bookType;
     private String cCode; // 센터 코드
 }

@@ -23,7 +23,7 @@ public class Reservation extends Base {
     private Member member; //회원은 회원쪽 매핑
 
     @Column(length=15, nullable = false)
-    private String donnerTel; //헌혈자 전화번호 /로그인화면이면 완성시키고 ,바꿀 수 있도록 설정
+    private String donorTel; //헌혈자 전화번호 /로그인화면이면 완성시키고 ,바꿀 수 있도록 설정
 
     //헌혈타입은 상수로 빼준다. (전혈, 혈장, 혈소판)
     @Enumerated(EnumType.STRING)

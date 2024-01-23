@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 public class ReservationNotFoundException extends AlertBackException {
     public ReservationNotFoundException() {
-        super(Utils.getMessage("NotFound.reservation1", "errors"), HttpStatus.NOT_FOUND);
+        super(Utils.getMessage("NotFound.reservation", "errors"), HttpStatus.NOT_FOUND);
     }
 
 }

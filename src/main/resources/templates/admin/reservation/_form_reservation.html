@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="form" th:object="${requestReservation}">
-    <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+  <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
     <h2>기본 정보</h2>
+    <style>
+
+    </style>
     <table class="table_cols mb30">
         <tr th:if="*{mode == 'edit_reservation' && bookCode != null}">
             <th>예약자 코드</th>
@@ -22,65 +25,50 @@
         <tr>
             <th width="180">회원번호</th>
             <td>
-                회원번호는 ...회원쪽 DB에서 가져와야하는데..
+                여기에 넣어야할까?? 넣는다면 어떻게
             </td>
         </tr>
         <tr>
             <th>예약자 연락처</th>
             <td>
-                <input type="text" name="donorTel1"  th:field="*{donorTel1}" id="donorTel1"> -
-                <input type="text" name="donorTel2" th:field="*{donorTel2}" id="donorTel2"> -
-                <input type="text" name="donorTel3" th:field="*{donorTel3}" id="donorTel3">
+                <div class="input_grp">
+                    <input type="text" name="donorTel" th:field="*{donorTel[0]}" id="donorTel1"  maxlength="4" size="4" class="w100"> -
+                    <input type="text" name="donorTel" th:field="*{donorTel[1]}" id="donorTel2" maxlength="4" size="4" class="w100"> -
+                    <input type="text" name="donorTel" th:field="*{donorTel[2]}" id="donorTel3" maxlength="4" size="4" class="w100">
+                </div>
+                <div class="error" th:each="err : ${#fields.errors('donorTel')}" th:text="${err}"></div>
 
-                <div class="error" th:each="err : ${#fields.errors('donorTel1')}" th:text="${err}"></div>
-                <div class="error" th:each="err : ${#fields.errors('donorTel2')}" th:text="${err}"></div>
-                <div class="error" th:each="err : ${#fields.errors('donorTel3')}" th:text="${err}"></div>
             </td>
         </tr>
-        <!--
-        <tr>
-            <th>전화번호</th>
-            <td>
-                <input type="text" name="telNum" th:field="*{telNum}">
-                <div class="error" th:each="err : ${#fields.errors('telNum')}" th:text="${err}"></div>
-            </td>
-        </tr>
-        -->
+
 
         <tr>
-            <th width="180">요일 설정</th>
+            <th>센터 선택</th>
             <td>
-                <input type="checkbox" name="bookYoil" value="일" id="bookYoil_1" th:field="*{bookYoil}">
-                <label for="bookYoil_1">일</label>
-
-                <input type="checkbox" name="bookYoil" value="월" id="bookYoil_2" th:field="*{bookYoil}">
-                <label for="bookYoil_2">월</label>
-
-                <input type="checkbox" name="bookYoil" value="화" id="bookYoil_3" th:field="*{bookYoil}">
-                <label for="bookYoil_3">화</label>
-
-                <input type="checkbox" name="bookYoil" value="수" id="bookYoil_4" th:field="*{bookYoil}">
-                <label for="bookYoil_4">수</label>
-
-                <input type="checkbox" name="bookYoil" value="목" id="bookYoil_5" th:field="*{bookYoil}">
-                <label for="bookYoil_5">목</label>
-
-                <input type="checkbox" name="bookYoil" value="금" id="bookYoil_6" th:field="*{bookYoil}">
-                <label for="bookYoil_6">금</label>
-
-                <input type="checkbox" name="bookYoil" value="토" id="bookYoil_7" th:field="*{bookYoil}">
-                <label for="bookYoil_7">토</label>
-
-                <div class="error" th:each="err : ${#fields.errors('bookYoil')}" th:text="${err}"></div>
+                <select>
+                    <option value="ALL">지역</option>
+                    <option value="Location1">지역1</option>
+                    <option value="Location2">지역2</option>
+                </select>
+                <select>
+                    <option value="ALL">세부지역</option>
+                    <option value="Location1">지역1</option>
+                    <option value="Location2">지역2</option>
+                </select>
+                <select>
+                    <option value="ALL">센터이름</option>
+                    <option value="center1">센터1</option>
+                    <option value="center2">센터2</option>
+                </select>
+                 최종 선택한 센터이름을 여기에 출력
             </td>
         </tr>
+
         <tr>
             <th>예약날짜 및 시간</th>
             <td>
-                <input type="date" >
+                <input type="date" name="bookDate" th:field="*{bookDate}" id="bookDate">
 
-            </td>
-            <td>
                 <select name="bookHour" th:field="*{bookHour}">
                     <option th:each="hour : ${#numbers.sequence(0, 23)}" th:value="${#numbers.formatInteger(hour, 2)}"
                             th:text="${#numbers.formatInteger(hour, 2)}"
@@ -100,13 +88,13 @@
             <th>헌혈 종류</th>
             <td>
                 <input type="radio" name="bookType" value="true" id="bookType_all" th:field="*{bookType}">
-                <label for="bookType_all">전혈</label>
+                <label for="bookType_all">전혈(ALL)</label>
 
                 <input type="radio" name="bookType" value="false" id="bookType_A" th:field="*{bookType}">
-                <label for="bookType_A">혈장</label>
+                <label for="bookType_A">혈장(A)</label>
 
                 <input type="radio" name="bookType" value="false" id="bookType_B" th:field="*{bookType}">
-                <label for="bookType_B">혈소판</label>
+                <label for="bookType_B">혈소판(B)</label>
 
                 <div class="error" th:each="err : ${#fields.errors('bookType')}" th:text="${err}"></div>
             </td>
