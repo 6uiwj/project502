@@ -53,7 +53,7 @@ public class ReservationInfoService {
 
         form.setBookCode(reservation.getBookCode());
         form.setDonorName(reservation.getMember().getName());
-        form.setDonorTel(StringUtils.hasText(donorTel) ? donorTel.split("-") : null);
+        form.setDonorTel(donorTel);
         form.setBookType(reservation.getBookType().name());
         form.setCenter(reservation.getCenter().getCName());
         //예약시간은 커맨드객체에 예약날짜(bookDate)+예약 시간(bookHour)+예약분(bookMin)으로 쪼개져 있는데
@@ -108,12 +108,14 @@ public class ReservationInfoService {
 
         /* 검색 조건 처리 E */
 
+        //page: 보여줄 페이지    limit: 한페이지당 출력할 데이터 수
         int page = Utils.onlyPositiveNumber(search.getPage(), 1);
         int limit = Utils.onlyPositiveNumber(search.getLimit(), 20);
 
         Pageable pageable = PageRequest.of(page, limit, Sort.by(desc("createdAt")));
         Page<Reservation> data = reservationRepository.findAll(andBuilder, pageable);
 
+        //페이지블록에 출력할 페이지수
         Pagination pagination = new Pagination(page, (int)data.getTotalElements(), 10, limit, request);
 
         return new ListData<>(data.getContent(), pagination);

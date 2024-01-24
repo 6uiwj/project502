@@ -16,7 +16,7 @@ public class RequestReservation {
         private long userNo; //회원번호
 
         @NotBlank
-        private String[] donorTel; //헌혈자 전화번호
+        private String donorTel; //헌혈자 전화번호
 
         @NotBlank
         private String bookType; //헌혈종류

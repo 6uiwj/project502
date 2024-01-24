@@ -31,13 +31,8 @@
         <tr>
             <th>예약자 연락처</th>
             <td>
-                <div class="input_grp">
-                    <input type="text" name="donorTel" th:field="*{donorTel[0]}" id="donorTel1"  maxlength="4" size="4" class="w100"> -
-                    <input type="text" name="donorTel" th:field="*{donorTel[1]}" id="donorTel2" maxlength="4" size="4" class="w100"> -
-                    <input type="text" name="donorTel" th:field="*{donorTel[2]}" id="donorTel3" maxlength="4" size="4" class="w100">
-                </div>
-                <div class="error" th:each="err : ${#fields.errors('donorTel')}" th:text="${err}"></div>
-
+               <input type="text" name="donorTel" th:field="*{donorTel}">
+                <div class="error" th:each="err : ${#fields.errors('donerTel')}" th:text="${err}"></div>
             </td>
         </tr>
 
