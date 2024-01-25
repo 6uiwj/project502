@@ -1,6 +1,7 @@
 package org.choongang.reservation.service;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.choongang.admin.reservation.controllers.RequestReservation;
@@ -76,6 +77,32 @@ public class ReservationInfoService {
         /* 검색 조건 처리 S */
 
 
+        String sopt = search.getSopt();
+        String skey = search.getSkey();
+        sopt = StringUtils.hasText(sopt) ? sopt : "all";
+
+
+        //검색조건 - 예약자명, 예약코드, 예약센터 24-01-25
+        if(StringUtils.hasText(skey)) {
+            skey = skey.trim(); //공백제거
+
+            //엔티티 데이터에 skey(검색어)와 일치하는 게 있는가?
+            BooleanExpression cNameCond = reservation.center.cName.contains(skey);
+            BooleanExpression nameCond = reservation.member.name.contains(skey);
+            BooleanExpression bookCodeCond = reservation.bookCode.stringValue().contains(skey);
+
+            if(sopt.equals("cName")) { //센터명으로 검색
+                andBuilder.and(cNameCond);
+            } else if(sopt.equals("mName")) { //예약자명으로 검색
+
+            } else { //예약코드로 검색
+
+            }
+        }
+        //24-01-25 end
+
+
+
         List<Long> memberSeq = search.getMemberSeq(); // 회원번호
         List<Long> bookCode = search.getBookCode(); // 예약 번호
         List<String> userId = search.getUserId(); // 회원아이디
@@ -84,13 +111,17 @@ public class ReservationInfoService {
 
         // 회원번호로 조회
         if (memberSeq != null && !memberSeq.isEmpty()) {
+            //select * from reservations where 검색한memberseq in (memberSeq);
             andBuilder.and(reservation.member.seq.in(memberSeq));
         }
+
 
         // 예약번호 조회
         if (bookCode != null && !bookCode.isEmpty()) {
             andBuilder.and(reservation.bookCode.in(bookCode));
         }
+
+
 
         // 회원 아이디 
         if (userId != null && !userId.isEmpty()) {

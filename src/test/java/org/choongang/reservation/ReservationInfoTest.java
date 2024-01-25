@@ -33,7 +33,7 @@ public class ReservationInfoTest {
     void init() {
         form = new RequestReservation();
         form.setDonorName("이름이다");
-        form.setDonorTel(new String[]{"010","1234","5678"});
+       // form.setDonorTel(new String[]{"010","1234","5678"});
         form.setBookType("ALL");
         form.setCenter("서울지점");
         form.setBookDate("2024-01-29");

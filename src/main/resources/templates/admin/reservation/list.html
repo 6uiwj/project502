@@ -11,13 +11,13 @@
             <th>키워드</th>
             <td>
                 <div class="input_grp">
-                    <select name="sopt" >
+                    <select name="sopt" th:field="*{sopt}" >
                         <option value="ALL">통합검색</option>
                         <option value="bookCode">예약코드</option>
-                        <option value="member.mName">예약자 이름</option>
+                        <option value="mName">예약자 이름</option>
                         <option value="cName">예약한 센터</option>
                     </select>
-                    <input type="text" >
+                    <input type="text" name="skey" th:field="*{skey}" >
 
                 </div>
             </td>
